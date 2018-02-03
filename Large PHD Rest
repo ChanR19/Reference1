@@ -1,0 +1,37 @@
+import java.io.*;
+import java.util.*;
+
+public class Large_PhD_Restaurant {
+    public static void main(String[] args)throws IOException{
+        BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+
+        String firstLine = console.readLine();
+        String[] splitFirstLine = firstLine.split(" ");
+        int money = Integer.parseInt(splitFirstLine[1]);
+        String secondLine = console.readLine();
+        String[] secondLineArray = secondLine.split(" ");
+        List<String> splitSecondLine = new ArrayList<String>();
+        for(int i = 0; i < Integer.parseInt(splitFirstLine[0]); i++){
+            splitSecondLine.add(secondLineArray[i]);
+        }
+        List<String> splitThirdLine = new ArrayList<String>();
+        for(int i = Integer.parseInt(splitFirstLine[0]); i < (Integer.parseInt(splitFirstLine[0]) * 2); i++){
+            splitThirdLine.add(secondLineArray[i]);
+        }
+
+        for(int i = 0; i < splitSecondLine.size(); i++){
+            if((Integer.parseInt(splitThirdLine.get(i)) - Integer.parseInt(splitSecondLine.get(i))) <= 0){
+                splitSecondLine.remove(i);
+                splitThirdLine.remove(i);
+            }
+        }
+
+        for(int i = 0; i < splitSecondLine.size(); i++){
+            if(money - Integer.parseInt(splitSecondLine.get(i)) >= 0){
+                money += (Integer.parseInt(splitThirdLine.get(i)) - Integer.parseInt(splitSecondLine.get(i)));
+            }
+        }
+
+        System.out.println(money);
+    }
+}
