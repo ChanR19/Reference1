@@ -1,0 +1,48 @@
+import java.util.*;
+
+public class Problem_3 {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int m = in.nextInt();
+        int[][] route = new int[m][2];
+        for(int route_i=0; route_i < m; route_i++){
+            for(int route_j=0; route_j < 2; route_j++){
+                route[route_i][route_j] = in.nextInt();
+            }
+        }
+        List<List<String>> groups = new ArrayList<List<String>>();
+        for(int i = 0; i < n; i++){
+            String[] thing = {Integer.toString(i + 1)};
+            groups.add(Arrays.asList(thing));
+        }
+
+        for(int i = 0; i < route.length; i++){
+            String[] group1 = {};
+            String[] group2 = {};
+            List<String> combo = new ArrayList<String>();
+            for(int j = 0; j < groups.size(); j++){
+                if(groups.get(j).contains(Integer.toString(route[i][0]))){
+                    group1 = (String[]) groups.get(j).toArray(new String[groups.get(j).size()]);
+                }
+                if(groups.get(j).contains(Integer.toString(route[i][0]))){
+                    group2 = (String[]) groups.get(j).toArray(new String[groups.get(j).size()]);
+                }
+            }
+            if(group1 != group2){
+                for(String num : group1){
+                    combo.add(num);
+                }
+                for(String num : group2){
+                    combo.add(num);
+                }
+            }
+            System.out.println(combo);
+            groups.add(combo);
+            groups.remove(group1);
+            groups.remove(group2);
+        }
+        System.out.println(groups);
+    }
+}
