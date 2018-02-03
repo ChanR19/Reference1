@@ -1,0 +1,25 @@
+import java.util.*;
+
+public class Problem_3_C {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int m = in.nextInt();
+        HashMap<Integer,Integer> groups = new HashMap<>();
+        for (int route_i = 0; route_i < m; route_i++) {
+            int[] route = new int[2];
+            route[0] = in.nextInt();
+            route[1] = in.nextInt();
+
+
+        }
+    }
+    public static Object getKeyFromValue(Map hm, Object value) {
+        for (Object o : hm.keySet()) {
+            if (hm.get(o).equals(value)) {
+                return o;
+            }
+        }
+        return null;
+    }
+}
