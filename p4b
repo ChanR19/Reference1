@@ -1,0 +1,62 @@
+import java.util.*;
+
+public class Problem_4_B {
+    private static int tries = 50000;
+
+    static long getMaxScore(long[] a, int n, int p){
+        Random rand = new Random();
+        long[] methodA = a;
+        List<Long> answers = new ArrayList<>();
+        boolean enoughAnswers = false;
+        ArrayList<ArrayList<Integer>> allCombos = new ArrayList<ArrayList<Integer>>();
+        while(!enoughAnswers) {
+            long answer = 0;
+            long runningSum = 0;
+
+            ArrayList<Integer> combo = new ArrayList<Integer>();
+            boolean comboDone = false;
+            while (!comboDone) {
+                int randNum = rand.nextInt(n);
+                if (!combo.contains(randNum)) {
+                    combo.add(randNum);
+                }
+                if (combo.size() >= n && !allCombos.contains(combo)) {
+                    allCombos.add(combo);
+                    comboDone = true;
+                } else if (combo.size() >= n) {
+                    combo = new ArrayList<>();
+                }
+            }
+
+            for (int num : combo) {
+                answer += (runningSum % methodA[num]);
+                runningSum += methodA[num];
+            }
+            if (!answers.contains(answer)) {
+                answers.add(answer);
+            }
+            if (allCombos.size() > tries || allCombos.size() >= p) {
+                enoughAnswers = true;
+            }
+            System.out.println(allCombos.size());
+        }
+        return Collections.max(answers);
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        long[] a = new long[n];
+        for(int a_i=0; a_i < n; a_i++){
+            a[a_i] = in.nextLong();
+        }
+        int maxPerms = 1;
+        for(int i = n; i > 0; i--){
+            maxPerms = maxPerms * i;
+        }
+        List<Long> answers = new ArrayList<Long>();
+        answers.add(getMaxScore(a,n,maxPerms));
+        long maxScore = Collections.max(answers);
+        System.out.println(maxScore);
+    }
+}
