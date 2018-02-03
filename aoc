@@ -1,0 +1,48 @@
+package com.ryanchan;
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException{
+	    BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+        int numOfRepeats = Integer.parseInt(console.readLine());
+
+        int[] registers = {0,0,0,0};
+        List<String> history = new ArrayList<String>();
+
+        for(int i = 0; i < numOfRepeats; i++){
+            history.add(console.readLine());
+        }
+
+        for(int j = 0 ; j < history.size(); j++){
+            String input = history.get(j);
+            String[] splitInput = input.split(" ");
+            if(splitInput[0].equals("jnz") && registers[getNum(splitInput[1])] != 0){
+                j += Integer.parseInt(splitInput[2]);
+            }else if(splitInput[0].equals("cpy")){
+                if(splitInput[1].matches("^-?\\d+$")) {
+                    registers[getNum(splitInput[2])] = Integer.parseInt(splitInput[1]);
+                }else{
+                    registers[getNum(splitInput[2])] = registers[getNum(splitInput[1])];
+                }
+            }else if(splitInput[0].equals("inc")){
+                registers[getNum(splitInput[1])]++;
+            }else if(splitInput[0].equals("dec")){
+                registers[getNum(splitInput[1])]--;
+            }
+        }
+        System.out.println("Register A: " + registers[0] + " Register B: " + registers[1] + " Register C: " + registers[2] + " Register D: " + registers[3]);
+    }
+
+    private static int getNum(String letter){
+        if(letter.equals("a")){
+            return 0;
+        }else if(letter.equals("b")){
+            return 1;
+        }else if(letter.equals("c")){
+            return 2;
+        }else{
+            return 3;
+        }
+    }
+}
