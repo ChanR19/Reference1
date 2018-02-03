@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*;
+
+public class Dudu_of_English {
+    public static void main (String[] args) throws IOException{
+        BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+        int numOfRuns = Integer.parseInt(console.readLine());
+        for(int i = 0; i < numOfRuns; i++){
+            String input = console.readLine().toLowerCase();
+            List<String> splitInput = new ArrayList<>(Arrays.asList(input.split(" ")));
+            String reformedInput1 = "";
+
+            for(String word : splitInput){
+                //Takes word, removes first vowel, and puts it back into splitInput
+                char[] charArray = word.toCharArray();
+                for(char letter : charArray){
+                    if(letter =='a'){
+
+                    }
+                }
+                //Takes word, replaces word with "of" and puts it back into splitInput
+                if(word.equals("to") || word.equals("nto") || word.equals("bove") || word.equals("below") || word.equals("from") || word.equals("by") || word.equals("s") || word.equals("t")){
+                    splitInput.set(splitInput.indexOf(word),"of");
+                }
+            }
+            System.out.println(reformedInput1);
+        }
+    }
+}
